@@ -6,8 +6,7 @@ contract BasicAsset is Asset {
     
     string public desc; 
 
-    constructor (string _desc) public {
-        owner = msg.sender; 
+    constructor (string _desc) Asset() public {
         desc = _desc; 
     }
 
