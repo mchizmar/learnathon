@@ -10,7 +10,17 @@ contract RentableAsset is BasicAsset {
         isRented = false; 
     }
 
-    function setIsRented(bool _isRented) public /*onlyOwner*/ { 
+    function setIsRented(bool _isRented) onlyOwner public { 
         isRented = _isRented;
+    }
+    
+    function destroy() onlyOwner public {
+      require(!isRented); 
+      super.destroy();
+    }
+
+    function destroyAndSend(address _recipient) onlyOwner public {
+      require(!isRented); 
+      super.destroyAndSend(_recipient);
     }
 }

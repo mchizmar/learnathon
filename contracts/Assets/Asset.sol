@@ -1,12 +1,7 @@
 pragma solidity ^0.4.17; 
 
-/**
-    TODO Import OpenZepellin libs for Ownable...
-*/
-contract Asset /*is Ownable*/ {
+import "openzeppelin-solidity/contracts/lifecycle/Destructible.sol";
 
-    address owner; 
-    constructor (){
-        owner = msg.sender; 
-    }
+contract Asset is Destructible {
+
 }

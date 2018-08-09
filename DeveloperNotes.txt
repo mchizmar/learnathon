@@ -1,0 +1,25 @@
+Creating a Private Chain with Geth
+
+Manually Deploying Contracts on Your Private Chain
+- 
+
+Web3 and Javascript
+- Reference: https://github.com/ethereum/wiki/wiki/JavaScript-API
+- Web3 servers, like ethereum nodes, host JSON-RPC endpoints. These endpoints are the entry points to your contract. 
+- using web3.js 
+    + You need a contract address (which is obtained when you deploy the contract) 
+    + You need the abi (application binary interface) for the contract. This can be obtained at compile time or from a Dapp browser like Mist. 
+    + The reference above contains examples. 
+- There are 2 types of calls to the contracts that eiter change state or doesnt. 
+    + Calls that change state 
+        - need additional JSON that identifies from address, gas, value, etc.. Ex if the function is setX(int x), calling the function looks like: contractInstance.setX(1, {from:0x2343534, ...})
+            + Properties that can be sent:
+                - from: <address> - the address calling the contract. This address is paying for the gas and any value transfer will come from this address (I think)
+                - gas: <wei> - the amount of gas you are willing to spend
+                - function(err, result) - an error first callback function to get the transaction value. 
+
+
+        - return a transaction id 
+        - you need to wait for the tx to be mined. 
+        - you need to make sure your account is unlocked (if you are using a non development chain)
+    

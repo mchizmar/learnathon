@@ -10,4 +10,7 @@ contract BasicAsset is Asset {
         desc = _desc; 
     }
 
+    function setDescription(string _descr) onlyOwner public { 
+        desc = _descr; 
+    }
 }

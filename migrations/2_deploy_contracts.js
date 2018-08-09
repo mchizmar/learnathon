@@ -1,10 +1,10 @@
-var ConvertLib = artifacts.require("./ConvertLib.sol");
-var MetaCoin = artifacts.require("./MetaCoin.sol");
 var Asset = artifacts.require("./Assets/Asset.sol"); 
+var BasicAsset = artifacts.require("./Assets/BasicAsset.sol"); 
+var RentableAsset = artifacts.require("./Assets/RentableAsset.sol"); 
 
 module.exports = function(deployer) {
-  deployer.deploy(ConvertLib);
-  deployer.link(ConvertLib, MetaCoin);
-  deployer.deploy(MetaCoin);
   deployer.deploy(Asset); 
+  deployer.deploy(BasicAsset, "description"); 
+  deployer.deploy(RentableAsset, "rentable description"); 
+
 };
