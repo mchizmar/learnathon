@@ -2,15 +2,16 @@ var RentableAsset = artifacts.require("./Assets/RentableAsset.sol");
 
 contract ('RentableAssetTest', function (accounts) {
 
-  // it("should default isRented to false (using async/await).", async () => {
-
-  //   let rentableAssetInstance = await RentableAsset.deployed(); 
-  //   //let isRented = await rentableAssetInstance.isRented.call(account[0]);
-  //   let isRented = await rentableAssetInstance.isRented();
-  //   console.log("LOG: isRented returned "+ JSON.stringify(isRented));
-  //   assert.equal(false, true, "RentableAsset.isRented() should default to false.");    
-
-  // });
+  it("should default isRented to false (using async/await).",  () => {
+    async function run() {
+      let rentableAssetInstance = await RentableAsset.deployed(); 
+      //let isRented = await rentableAssetInstance.isRented.call(account[0]);
+      let isRented = await rentableAssetInstance.isRented.call(address[0]);
+      console.log("LOG: isRented returned "+ JSON.stringify(isRented));
+      assert.equal(false, true, "RentableAsset.isRented() should default to false.");    
+    }
+    run(); 
+  });
 
   it("should default isRented to false.", function () {
 

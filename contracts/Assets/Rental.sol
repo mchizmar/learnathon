@@ -12,9 +12,9 @@ contract Rental is Destructible {
     enum PerUnit { Minute, Hour, Day, Week, Month, Year }
 
     event TermsNegotiated (uint priceInWei, uint perUnit, address rentableAsset, address renter); 
-    event RentalPeriodStarted (uint256 startTimeInSecndsEpoch, uint priceInWei, uint perUnit, address rentableAsset, address renter); 
-    event RentalPeriodEnded (uint256 startTimeInSecndsEpoch, uint256 endTimeInSecndsEpoch, uint priceInWei, uint perUnit, address rentableAsset, address renter); 
-    event PaymentReconciled (uint256 totalPriceInWei, uint256 startTimeInSecndsEpoch, uint256 endTimeInSecndsEpoch, uint priceInWei, uint perUnit, address rentableAsset, address renter); 
+    event RentalPeriodStarted (uint256 startTimeInSecondsEpoch, uint priceInWei, uint perUnit, address rentableAsset, address renter); 
+    event RentalPeriodEnded (uint256 startTimeInSecondsEpoch, uint256 endTimeInSecondsEpoch, uint priceInWei, uint perUnit, address rentableAsset, address renter); 
+    event PaymentReconciled (uint256 totalPriceInWei, uint256 startTimeInSecondsEpoch, uint256 endTimeInSecondsEpoch, uint priceInWei, uint perUnit, address rentableAsset, address renter); 
 
     RentableAsset public rentableAsset;    
     RentalStage public rentalStage; 
@@ -24,7 +24,11 @@ contract Rental is Destructible {
     uint256 public startTimeInSecondsEpoch; 
     uint256 public endTimeInSecondsEpoch; 
  
-    constructor (address _rentableAsset, address _renter) Destructible(){ 
+    /**
+        Should the Rentable asset onw this contract? Yes OR should the owner of the Asset own the contract. 
+        Me thinks the asset should own the contact. 
+    */
+    constructor (address _rentableAsset, address _renter) public Destructible(){ 
         /*
             Creating a contract instance from another contract
             TODO: How will this fail if _rentableAsset is not of type RentableAsset? 
@@ -35,7 +39,7 @@ contract Rental is Destructible {
         rentalStage = RentalStage.Negotiation;
     }
 
-    function setNegotiatedTerms(uint _priceInWei, uint _perUnit) onlyOwner {         
+    function setNegotiatedTerms(uint _priceInWei, uint _perUnit) public onlyOwner {         
         require(rentalStage == RentalStage.Negotiation); 
         require(_perUnit >= uint(PerUnit.Minute) && _perUnit <= uint(PerUnit.Year)); 
 
@@ -68,7 +72,7 @@ contract Rental is Destructible {
         emit RentalPeriodEnded(startTimeInSecondsEpoch, endTimeInSecondsEpoch, priceInWei, perUnit, rentableAsset, renter); 
     }
 
-    function reconcilePayment() onlyOwner payable { 
+    function reconcilePayment() public onlyOwner payable { 
         require(rentalStage == RentalStage.EndRental); 
         require(!rentableAsset.isRented()); 
 
@@ -78,16 +82,22 @@ contract Rental is Destructible {
         uint256 totalPrice = calculatePriceInWei(); 
 
         rentalStage = RentalStage.PaymentReconciled;
-        emit PaymentReconciled(totalPrice, startTimeInSecondsEpoch, endTimeInSecondsEpoch, 
-                                priceInWei, perUnit, rentableAsset, renter); 
-
+        emit PaymentReconciled(totalPrice, startTimeInSecondsEpoch, endTimeInSecondsEpoch, priceInWei, perUnit, rentableAsset, renter); 
     }
 
-    function calculatePriceInWei() internal returns (uint256){
+    /**
+        Returns
+        uint256 startTimeInSecondsEpoch, uint priceInWei, uint perUnit, address rentableAsset, address renter
+    */
+    function getCurrentRentalInfo() public view onlyOwner returns (uint256, uint, uint, address, address){
+        return (startTimeInSecondsEpoch, priceInWei, perUnit, rentableAsset, renter);
+    }
+
+    function calculatePriceInWei() internal pure returns (uint256){
         return 1; 
     }
 
-    function getRenter() onlyOwner returns (address) { 
+    function getRenter() public view onlyOwner returns (address) { 
         return renter;
     }
 }
