@@ -22,4 +22,7 @@ Web3 and Javascript
         - return a transaction id 
         - you need to wait for the tx to be mined. 
         - you need to make sure your account is unlocked (if you are using a non development chain)
-    
+- Address = Account = Public Key
+
+- You updated truffle contract javascript based off the udemy(Thomas) course 
+        - npm install --save-dev truffle-contract@2.0.0

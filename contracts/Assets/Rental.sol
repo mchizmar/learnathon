@@ -25,20 +25,27 @@ contract Rental is Destructible {
     uint256 public endTimeInSecondsEpoch; 
  
     /**
-        Should the Rentable asset onw this contract? Yes OR should the owner of the Asset own the contract. 
-        Me thinks the asset should own the contact. 
+        -- MOVED -- 
+       Note: this code has been moved to RentableAsset to make the dev easier for the learnathon. 
+       I think I overengineered this to conform to OOP practices. Contracts are similar to Objects, 
+       but the runtime and paradigm are different. Instantiation and constructor parameters are 
+       difficult to manage on Ethereum. So I am avoinding them. 
+
+        Should the Rentable asset own this contract? OR should the owner of the Asset own the contract? 
+            - The owning addres is an account that has a private key. 
+            - Should Asset be a Wallet Contract that can accept paymetns?
+            - If the Asset is a Wallet Contract (which I think means it has a private key) then it should own the contract. 
     */
     constructor (address _rentableAsset, address _renter) public Destructible(){ 
-        /*
-            Creating a contract instance from another contract
-            TODO: How will this fail if _rentableAsset is not of type RentableAsset? 
-        */
         rentableAsset = RentableAsset(_rentableAsset);
         renter = _renter; 
         
         rentalStage = RentalStage.Negotiation;
     }
 
+    /*
+        -- MOVED -- 
+    */
     function setNegotiatedTerms(uint _priceInWei, uint _perUnit) public onlyOwner {         
         require(rentalStage == RentalStage.Negotiation); 
         require(_perUnit >= uint(PerUnit.Minute) && _perUnit <= uint(PerUnit.Year)); 
@@ -50,6 +57,10 @@ contract Rental is Destructible {
         emit TermsNegotiated(priceInWei, perUnit, address(rentableAsset), renter); 
     }
 
+
+    /*
+        -- MOVED -- 
+    */
     function startRentalPeriod(uint256 _startTimeInSecondsEpoch) public { 
         require(!rentableAsset.isRented());
         require(rentalStage == RentalStage.PreRental);
@@ -61,6 +72,9 @@ contract Rental is Destructible {
         emit RentalPeriodStarted(startTimeInSecondsEpoch, priceInWei, perUnit, rentableAsset, renter); 
     }
 
+    /*
+        -- MOVED -- 
+    */
     function endRentalPeriod(uint256 _endTimeInSecondsEpoch) public { 
         require(rentableAsset.isRented());
         require(rentalStage == RentalStage.InRental);
@@ -72,6 +86,9 @@ contract Rental is Destructible {
         emit RentalPeriodEnded(startTimeInSecondsEpoch, endTimeInSecondsEpoch, priceInWei, perUnit, rentableAsset, renter); 
     }
 
+    /*
+        -- MOVED -- 
+    */
     function reconcilePayment() public onlyOwner payable { 
         require(rentalStage == RentalStage.EndRental); 
         require(!rentableAsset.isRented()); 

@@ -6,11 +6,11 @@ contract BasicAsset is Asset {
     
     string public desc; 
 
-    constructor (string _desc) Asset() public {
-        desc = _desc; 
+    constructor () Asset() public {
     }
 
     function setDescription(string _descr) onlyOwner public { 
         desc = _descr; 
     }
+    
 }
