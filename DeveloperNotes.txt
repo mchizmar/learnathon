@@ -26,3 +26,26 @@ Web3 and Javascript
 
 - You updated truffle contract javascript based off the udemy(Thomas) course 
         - npm install --save-dev truffle-contract@2.0.0
+
+- When deploying contracts to a learnathon chain you had to update the gas value in truffle.js to complete migration
+ learnathon: {
+      host: '127.0.0.1',
+      port: 8545,
+      network_id: '1999',
+      gas: 4712388 // default gas value
+    }
+
+- When starting your private chain make sure the geth networkid is the same as the chainID in the genesis file.
+
+- For truffle contract deployments, you can specify the from address in the truffle.js. 
+Make sure the account is unlocked which you can do through geth or here is a post showing 
+how they did it in the 1_initial_migration.js file
+https://ethereum.stackexchange.com/questions/25413/truffle-mingration-error-authentication-needed-password-or-unlock
+ learnathon: {
+      host: '127.0.0.1',
+      port: 8545,
+      network_id: '63',
+      gas: 4712388, // default gas value
+      from: '0x574ed7ceec9a292daad2c4469391c72ffedefd5d' // account used to deploy the contract
+    }
+

@@ -5,7 +5,7 @@
 ## 1. Before creating the chain, create the accounts first and fund them. Repeat this command for as many accounts you need. 
 ##
 geth --datadir chaindata account new;
-ks
+
 # Created accounts below. Output written to chaindata/keystore
 # NW150201:learnathon chizmm1$ geth --datadir chaindata account new
 # Your new account is locked with a password. Please give a password. Do not forget this password.
@@ -60,11 +60,12 @@ ks
 
 #
 # Initialize the chain with the genesis file information listed above
+# ** IMPORTANT - make sure --networkid is the same value as the chainId you specified in the genesis file.
 # 
-geth --identity "LearnathonChain" --rpc --rpcport 8545 --rpccorsdomain “*” --datadir chaindata/data --port 30303 --nodiscover --rpcapi db,eth,net,web3,personal --networkid 1999 --maxpeers 2 --verbosity 6 init chaindata/genesis.json 2>> chaindata/logs/`date +%s`.log
+geth --identity "LearnathonChain" --rpc --rpcport 8545 --rpccorsdomain “*” --datadir chaindata/data --port 30303 --nodiscover --rpcapi db,eth,net,web3,personal --networkid 63 --maxpeers 2 --verbosity 6 init chaindata/genesis.json 2>> chaindata/logs/`date +%s`.log
 
 # Attach a geth console
-geth --identity "LearnathonChain" --rpc --rpcport 8545 --rpccorsdomain “*” --datadir chaindata/data --port 30303 --nodiscover --rpcapi db,eth,net,web3,personal --networkid 1999 console
+geth --identity "LearnathonChain" --rpc --rpcport 8545 --rpccorsdomain “*” --datadir chaindata/data --port 30303 --nodiscover --rpcapi db,eth,net,web3,personal --networkid 63 console
 
 # Connect Mist browser to the private chain
 /Applications/Mist.app/Contents/MacOS/Mist --rpc http://localhost:8545
