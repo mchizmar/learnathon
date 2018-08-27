@@ -1,0 +1,6 @@
+Asset Rental Stories 
+
+As an owner I want to create an asset contract to Rental
+
+As a rental contract I want to set a renter
+

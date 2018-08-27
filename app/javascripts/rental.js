@@ -63,14 +63,34 @@ window.App = {
         document.getElementById("rentalassetbalance").innerText = res;
        });
     })
-  }, 
+    console.log("ACCOUNT : " + account);
 
-  setRenter: function() {
+    web3.eth.getBalance(account, function(err, res){
+      if (err) {
+        console.log("Error getting balance for Current account : " + err);
+
+      } else {
+        console.log("Current account is : " + account.address);
+        console.log("Current account balance is : " + res);
+      }
+    });
     RentableAssetContract.deployed().then(function(instance){
       instance.owner.call().then(function(val){
         console.log("RentableAsset owner: "+val);
       });
+
+      instance.getCurrentRentalInfo.call().then(function(val){
+        console.log("Current rental info : "+val);
+      });
+
+      instance. getRequestInfo.call().then(function(val){
+        console.log("Request Info : "+val);
+      });
     });
+
+  }, 
+
+  setRenter: function() {
   }, 
   
   isRented: function(){
