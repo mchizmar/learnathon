@@ -6,19 +6,81 @@
   <script src="./rental.js"></script>
 </head>
 <body>
+
+  <div class="container">    
+      
+    <br/><br/><br/><br/><br/>
+    <div class="row">
+        <div class="col-md" id="currentAccount">
+            <p class="font-weight-bold">Currently Select Account: <span id="currentlySelectedAccount"></span></p>
+            <p class="font-weight-bold">Balance: <span id="currentlySelectedAccountBalance"></span></p>
+        </div>      
+    </div>
+    <div class="row">
+        <div class="col-md" id="owner-column">
+            <p class="font-weight-bold">Asset and Contract Owner</p>
+            <button type="button" class="btn btn-primary" onclick="App.outputBasicInfo()">Get Contract Info</button>  
+          </div>
+        <div class="col-md" id="renter-column">
+            <p class="font-weight-bold">Renter</p>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-md" id="owner-column-content">
+              <form>
+                  <div class="form-group">
+                    
+                    <label for="rentalAssetAddress">Contract Account/Address</label>
+                    <input type="text" disabled class="form-control" id="rentalAssetAddress">
+
+                    <label for="isRented">Is Rented?</label>
+                    <input type="text" disabled class="form-control" id="isRented">                    
+
+                    <label for="rentalInfo">Current Rental Info</label>
+                    <input type="text" disabled class="form-control" id="rentalInfo">
   
-  <h1>Rental Asset Dapp</h1>
-  <br>
-  <div><b>Rental Asset Contract Located At</b> : <span id="rentalassetaddress"> </span></div>
-  <div><b>Rental Asset balance in Ether : </b><span id="rentalassetbalance"> </span></div>
+                    <label for="ownerAddressText">Onwer's Account</label>
+                    <input type="text" disabled class="form-control" id="ownerAddressText">
+                    
+                    <label for="rentalAssetBalance">Contract Balance</label>
+                    <input type="text" disabled class="form-control" id="rentalAssetBalance">
 
-  <br>
-  <h1>Renter</h1>
-  <br>
-    <b>Enter a renter's eth address (aka account or private key):</b>
-    <input type="text" id="renteraddress" placeholder="0x0912332324234234"></input>
-    <button id="setrenter" onclick="App.setRenter()">Set Renter</button>
-  <br>
+                    <label for="requestInfo">Current Request Info</label>
+                    <input type="text" disabled class="form-control" id="requestInfo">
+                    
+                  </div>
+                </form>
+          </div>
+          <div class="col-md" id="renter-column-content">
+              
+            <form id="rentalRequestForm">
+            
+              <div class="form-group">
+                    
+                    <label for="requestRentalPriceInWei">Price in Wei</label>
+                    <input type="text"  class="form-control" id="requestRentalPriceInWei">
 
+                    <label for="requestRentalPriceUnit"></label>
+                    <select class="custom-select" id="requestRentalPriceUnit">
+                        <option value="0" selected>Second</option>
+                        <option value="1">Minute</option>
+                        <option value="2">Hour</option>
+                        <option value="3">Day</option>
+                        <option value="4">Week</option>
+                        <option value="5">Month</option>
+                        <option value="6">Year</option>
+                      </select>
+                      <br/>
+                      <br/>
+                  </div>
+                </form>
+                
+                <button class="btn btn-primary" onclick="App.requestRental()">Send Request</button>
+
+          </div>
+
+          </div>
+        </div>
+    </div>
 </body>
 </html>

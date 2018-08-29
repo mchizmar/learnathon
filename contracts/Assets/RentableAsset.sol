@@ -107,7 +107,6 @@ contract RentableAsset is BasicAsset {
 
         rentalStage = RentalStage.Available;
 
-
         emit RentalPeriodEnded(startTimeInSecondsEpoch, endTimeInSecondsEpoch, priceInWei, perUnit, address(this), renter); 
     }
 

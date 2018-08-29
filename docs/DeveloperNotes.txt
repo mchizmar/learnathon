@@ -2,6 +2,11 @@ Creating a Private Chain with Geth
 
 Manually Deploying Contracts on Your Private Chain
 - 
+- Good reference w/ models about Accounts and Contracts
+    https://medium.com/coinmonks/ethereum-account-212feb9c4154
+
+    - technical reference on how an eth address is created
+    https://www.royalfork.org/2017/12/10/eth-graphical-address/
 
 Web3 and Javascript
 - Reference: https://github.com/ethereum/wiki/wiki/JavaScript-API
@@ -49,3 +54,24 @@ https://ethereum.stackexchange.com/questions/25413/truffle-mingration-error-auth
       from: '0x574ed7ceec9a292daad2c4469391c72ffedefd5d' // account used to deploy the contract
     }
 
+- Testing a contract from the Gegitth console
+    -- Getting a contract instance 
+    var abi = [...]
+    var contract = web3.eth.contract(abi);
+    var instance = contract.at("0xADDRESS")
+
+    -- Listenting to events on the contract 
+    var requestEvent = instance.RentalRequested();
+    requestEvent.watch(function(error, event){
+        if (error) {
+            console.log("Error: " + error);
+        } else {
+            console.log('some event occured');
+        }
+    });
+
+    -- calling state changing function geth
+    -- Note: geth APIS are synchronous, web APIs changing state should be written asynchrounously to account for mining
+    reference https://ethereum.stackexchange.com/questions/7557/syntax-for-calling-contract-state-changing-methods
+    tx = instance.requestRental(123, 0, {from:eth.accounts[1]})
+    eth.getTransactionReceipt(tx)
