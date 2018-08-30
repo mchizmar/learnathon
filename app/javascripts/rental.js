@@ -25,7 +25,7 @@ var account;
 
 window.App = {
 
-  //RentableAsset: RentableAssetContract, 
+  RentableAsset: RentableAssetContract, 
 
   start: function() {
     var self = this;
@@ -118,10 +118,28 @@ window.App = {
     
     RentableAssetContract.deployed().then(function(instance){
 
-      instance.requestRental(priceInWei, priceUnit, {from: account, gas: 500000})
-        .then(function(res){console.log("requestRental transaction hash : " + res); })
-        .catch(function(err){console.log("requestRental transaction err : " + err); });
-      
+      instance.requestRental.sendTransaction(priceInWei, priceUnit, {from: account, gas: 500000})
+        .then(function(res){
+          console.log("requestRental transaction hash : " + res); }
+        )
+        .catch(function(err){
+          console.log("requestRental transaction err : " + err); }
+        )
+    })
+  },
+  denyRentalRequest: function(){
+    
+    
+    console.log("calling denyRental()"); 
+    
+    RentableAssetContract.deployed().then(function(instance){
+      instance.denyRentalRequest.sendTransaction({from: account, gas: 500000})
+        .then(function(res){
+          console.log("denyRentalRequest transaction hash : " + res); }
+        )
+        .catch(function(err){
+          console.log("denyRentalRequest transaction err : " + err); }
+        )
     })
   },
 
@@ -157,6 +175,17 @@ window.App = {
         }
       });
     });
+
+    // RentableAssetContract.deployed().then(function(instance) {
+    //   var eventRentalRequestStarted = instance.RentalRequestStarted().watch(function(error, event) {
+    //     if (error){
+    //       console.log(error);
+    //     } else {
+    //       console.log(event);
+    //     }
+    //   });
+    // });
+
   },
 
   setNegotiatedTerms: function(){

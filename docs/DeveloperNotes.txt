@@ -75,3 +75,8 @@ https://ethereum.stackexchange.com/questions/25413/truffle-mingration-error-auth
     reference https://ethereum.stackexchange.com/questions/7557/syntax-for-calling-contract-state-changing-methods
     tx = instance.requestRental(123, 0, {from:eth.accounts[1]})
     eth.getTransactionReceipt(tx)
+
+- Truffle commands for compiling and migrating
+truffle compile 
+truffle migrate --network learnathon # initial migration of contract
+truffle migrate --network learnathon --reset # redeploy a version that has already been deployed

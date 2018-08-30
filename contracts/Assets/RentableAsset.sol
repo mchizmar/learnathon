@@ -7,6 +7,7 @@ contract RentableAsset is BasicAsset {
     enum RentalStage {Available, InRental}
     enum PerUnit { Second, Minute, Hour, Day, Week, Month, Year }
 
+    event RentalRequestedStarted(address requester, uint priceInWei, uint perUnit); 
     event RentalRequested(address requester, uint priceInWei, uint perUnit); 
     event RentalRequestDenied(address requester, uint priceInWei, uint perUnit); 
     event RentalPeriodStarted (uint startTimeInSecondsEpoch, uint priceInWei, uint perUnit, address rentableAsset, address renter); 
@@ -70,7 +71,7 @@ contract RentableAsset is BasicAsset {
     
     function requestRental(uint _priceInWei, uint _perUnit) 
      public noActiveRequest isNotRented isValidPerUnit(_perUnit) {
-        
+        emit RentalRequestedStarted(requester, requestPriceInWei, requestPerUnit);    
         requester = msg.sender; 
         requestPriceInWei = _priceInWei; 
         requestPerUnit = _perUnit; 
