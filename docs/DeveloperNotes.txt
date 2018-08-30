@@ -80,3 +80,16 @@ https://ethereum.stackexchange.com/questions/25413/truffle-mingration-error-auth
 truffle compile 
 truffle migrate --network learnathon # initial migration of contract
 truffle migrate --network learnathon --reset # redeploy a version that has already been deployed
+
+
+-AWS Notes 
+    - Compile geth from source b/c no yum packages available for aws linux/centos
+        http://blog.bradlucas.com/posts/2017-07-18-ethereum-installing-geth-on-centos/
+
+    - You created a blockchain-security-group (firewall) and opened a custom tcp inbound rule:
+        Custom TCP Rule, Port 8545, From Anywhere
+    
+    - connecting to geth on AWS 
+        geth attach http://ip-address:8545 
+        my node: geth attach http://54.234.240.86:8545
+

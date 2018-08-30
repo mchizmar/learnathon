@@ -62,10 +62,10 @@ geth --datadir chaindata account new;
 # Initialize the chain with the genesis file information listed above
 # ** IMPORTANT - make sure --networkid is the same value as the chainId you specified in the genesis file.
 # 
-geth --identity "LearnathonChain" --rpc --rpcport 8545 --rpccorsdomain “*” --datadir chaindata/data --port 30303 --nodiscover --rpcapi db,eth,net,web3,personal --networkid 63 --maxpeers 2 --verbosity 6 init chaindata/genesis.json 2>> chaindata/logs/`date +%s`.log
+geth --identity "LearnathonChain" --rpc --rpcport 8545 --rpccorsdomain “*” --datadir chaindata --port 30303 --nodiscover --rpcapi db,eth,net,web3,personal --networkid 63 --maxpeers 2 --verbosity 6 init chaindata/genesis.json 2>> chaindata/logs/`date +%s`.log
 
 # Attach a geth console
-geth --identity "LearnathonChain" --rpc --rpcport 8545 --rpccorsdomain “*” --datadir chaindata/data --port 30303 --nodiscover --rpcapi db,eth,net,web3,personal --networkid 63 console
+geth --identity "LearnathonChain" --rpc --rpcport 8545 --rpccorsdomain “*” --datadir chaindata --port 30303 --nodiscover --rpcapi db,eth,net,web3,personal --networkid 63 console
 
 # Connect Mist browser to the private chain
 /Applications/Mist.app/Contents/MacOS/Mist --rpc http://localhost:8545

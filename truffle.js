@@ -14,6 +14,13 @@ module.exports = {
       network_id: '63',
       gas: 4712388, // default gas value
       from: '0x574ed7ceec9a292daad2c4469391c72ffedefd5d' // account used to deploy the contract
+    }, 
+    aws: { 
+      host: '54.234.240.86',
+      port: 8545,
+      network_id: '63',
+      gas: 4712388, // default gas value
+      from: '0x080b36e46a0c26ed887baac3d4897695aca869e2' // account used to deploy the contract
     }
   }
 }
