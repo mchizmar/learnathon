@@ -93,3 +93,8 @@ truffle migrate --network learnathon --reset # redeploy a version that has alrea
         geth attach http://ip-address:8545 
         my node: geth attach http://54.234.240.86:8545
 
+    - I **think** data and chaindata dirs were creaed in ~/.ethereum dir when no datadir was specified. 
+    This might have conflicted with mining so I removed them. 
+
+    Says that tc2.micro did not work for mining private chain which you are using!!!
+    - https://blockgeeks.com/two-node-setup-of-a-private-ethereum/
