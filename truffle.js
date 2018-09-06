@@ -19,7 +19,7 @@ module.exports = {
     aws: { //aws ac
       //host: '54.234.240.86',
       host: '18.212.195.193',
-      port: 8545,
+      port: 8885,
       network_id: '63',
       gas: 4712388, // default gas value
       //from: '0x080b36e46a0c26ed887baac3d4897695aca869e2' // account used to deploy the contract

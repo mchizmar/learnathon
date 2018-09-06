@@ -127,22 +127,79 @@ window.App = {
         )
     })
   },
+
   denyRentalRequest: function(){
-    
-    
+
     console.log("calling denyRental()"); 
     
     RentableAssetContract.deployed().then(function(instance){
       instance.denyRentalRequest.sendTransaction({from: account, gas: 500000})
         .then(function(res){
-          console.log("denyRentalRequest transaction hash : " + res); }
-        )
+          console.log("denyRentalRequest transaction hash : " + res); 
+        })
         .catch(function(err){
-          console.log("denyRentalRequest transaction err : " + err); }
-        )
+          console.log("denyRentalRequest transaction err : " + err); 
+        })
     })
   },
+  
+  startRental: function(){
+    var startTime = new Date().getTime();
+    console.log("calling startRental()"); 
+    
+    RentableAssetContract.deployed().then(function(instance){
+      instance.startRental.sendTransaction(startTime, {from: account, gas: 900000})
+        .then(function(res){
+          console.log("startRental transaction hash : " + res); 
+        })
+        .catch(function(err){
+          console.log("startRental transaction err : " + err); 
+        })
+    })
+  }, 
 
+  endRental: function(){
+    var endTime = new Date().getTime();
+    console.log("calling endRental()"); 
+    
+    RentableAssetContract.deployed().then(function(instance){
+      instance.endRental.sendTransaction(endTime, {from: account, gas: 900000})
+        .then(function(res){
+          console.log("endRental transaction hash : " + res); 
+        })
+        .catch(function(err){
+          console.log("endRental transaction err : " + err); 
+        })
+    })
+  }, 
+  
+  reconcilePayment: function(){ 
+    console.log("calling reconcileParyment()"); 
+
+    RentableAssetContract.deployed().then(function(instance){
+      instance.reconcilePayment.sendTransaction({from: account, gas: 900000, value:instance.totalPriceInWei()})
+        .then(function(res){
+          console.log("reconcilePayment transaction hash : " + res); 
+        })
+        .catch(function(err){
+          console.log("reconcilePayment transaction err : " + err); 
+        })
+    })  
+  },
+  reset: function(){ 
+    console.log("calling reset()"); 
+
+    RentableAssetContract.deployed().then(function(instance){
+      instance.reconcilePayment.sendTransaction({from: account, gas: 900000})
+        .then(function(res){
+          console.log("reset  transaction hash : " + res); 
+        })
+        .catch(function(err){
+          console.log("reset transaction err : " + err); 
+        })
+    })
+  },
+  
   isRented: function(){
     RentableAssetContract.deployed().then(function(instance){
       instance.isRented.call().then(function(val){
@@ -155,9 +212,8 @@ window.App = {
     var self = this;
     var contract;
 
-    console.log("listening to events")
     RentableAssetContract.deployed().then(function(instance) {
-      var eventRentalRequested = instance.RentalRequested().watch(function(error, event) {
+      var allEvents = instance.allEvents().watch(function(error, event) {
         if (error){
           console.log(error);
         } else {
@@ -166,43 +222,29 @@ window.App = {
       });
     });
 
-    RentableAssetContract.deployed().then(function(instance) {
-      var eventRentalRequestDenied = instance.RentalRequestDenied().watch(function(error, event) {
-        if (error){
-          console.log(error);
-        } else {
-          console.log(event);
-        }
-      });
-    });
-
-    // RentableAssetContract.deployed().then(function(instance) {
-    //   var eventRentalRequestStarted = instance.RentalRequestStarted().watch(function(error, event) {
-    //     if (error){
-    //       console.log(error);
-    //     } else {
-    //       console.log(event);
-    //     }
-    //   });
-    // });
 
   },
 
-  setNegotiatedTerms: function(){
-
-  }, 
-
-  startRentalPeriod: function(){
-
-  }, 
-  
-  endRentalPeriod: function(){
-
-  }, 
-
-  reconcilePayment: function(){ 
-
+  subscribeToLogs: function(){
+    let subscriptionToLogs = web3.eth.subscribe('logs', {
+      address: account,
+      topics: [null]
+    },
+    (error, log) => {
+      if (!error) {
+        console.log(`Subscription - Log: `, log); 
+      } else {
+        console.log(`Error - Subscription - Log:: ${error}`);
+      }
+    })
+    .on('data', function(log) {
+      console.log(`Subscription - Log Data: `, log);
+    })
+    .on('changed', function(log) {
+      console.log(`Subscription - Log Changed: `, log);
+    });
   }
+
 };
 
 window.addEventListener('load', function() { 
