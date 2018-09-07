@@ -214,7 +214,7 @@ contract RentableAsset is BasicAsset {
     }
 
 
-    function resetRequestVariables() internal onlyOwner {
+    function resetRequestVariables() public  {
         requester = address(0); 
         requestPriceInWei = 0; 
         requestPerUnit = PerUnit.Second;//making sure its out of range
