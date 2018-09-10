@@ -38,8 +38,6 @@ Downloading and install the necessary software
         * In the left hand navigation select Network and Security/Security Groups. 
         * Select the Create Security Group
             * Give the group a name and add the *inbound* groups displayed in the provided image. 
-            
-
 
 
 
