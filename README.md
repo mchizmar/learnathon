@@ -24,6 +24,7 @@ This challenge is to to create a mining node and connect it to my private networ
 
 ### Prerequisites
 Geth - Ethereum Client (Node) Software
+genesis.json md5 661aa786e2d52d64bfe31fc05ec666af
 
 
 ### Installing
