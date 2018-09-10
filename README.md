@@ -23,11 +23,28 @@ I have created a private network and am hosting it on an AWS EC2 Medium instance
 
 This challenge is to to create a mining node and connect it to my private network. 
 
-
 ### Prerequisites
 Downloading and install the necessary software
 
-* Checkout the Github project
+* Create an Amazon EC2 Instance to host your miner
+    * [Log into AWS console](https://nwblockchain.signin.aws.amazon.com/console)
+    * Select EC2 under the Services Menu
+    * Select Launch Instance Button
+        * Select: Amazon Linux 2 AMI (HVM), SSD Volume Type
+        * Select Instance Type : t2.medium
+        * Select Review and Launch
+        * Create your key file you will use to secure login/ssh to your new machine and save for later. You will need to use PuTTy or the command line. 
+    * Enable Security Groups to enable Inbounf SSH and Blockchain connections to your server. 
+        * In the left hand navigation select Network and Security/Security Groups. 
+        * Select the Create Security Group
+            * Give the group a name and add the *inbound* groups displayed in the provided image. 
+            
+
+
+
+
+
+* Checkout the Github project t 
     * https://github.nwie.net/chizmm1/learnathon
 
 * [Go Ethereum - Geth](https://geth.ethereum.org/): Ethereum Protocol Implementation
@@ -46,11 +63,12 @@ Downloading and install the necessary software
         * chaindata/keystore contains the keys for accounts have have been preconfigured on the network. 
         * You need these keys to create a miner on the network.
     * This chaindata is also known as "datadir" for the upcoming geth commands. 
-    * 
+
 
 ## Creating a Miner
 At this point, creating a miner is a relatively simple task, assuming the prerequisites have been followed. 
 
+### Creating a Local Miner
 * Open up a command line - DOS or MacOS/Bash shell. 
 * Change directory to learnathon/setting-up-a-miner
 * Initializing your miner to mine on my private network. 
@@ -58,7 +76,7 @@ At this point, creating a miner is a relatively simple task, assuming the prereq
         * geth --datadir chaindata init genesis.json
 * Now that you are configured and initialized, you can now being joining the network by starting up a geth node instance. 
     * Starting your geth node to connect to the my private network:
-        * geth --datadir chaindata --networkid 63 --identity "node1" --etherbase=0x348cdfd4875cd7c522e1ea0376b07b03e850b02a --rpc --rpcport 8885 --rpccorsdomain “\*” --rpcaddr "0.0.0.0" --rpcapi db,eth,net,web3,personal,miner --ws --wsorigins="*" --wsapi db,eth,net,web3,personal --port 30303 --nodiscover --maxpeers 10 --verbosity 3 --unlock 0  --password chaindata/password.txt --mine --minerthreads=5 
+        * geth --datadir chaindata --networkid 63 --identity "node1" --etherbase=0x348cdfd4875cd7c522e1ea0376b07b03e850b02a --rpc --rpcport 8885 --rpccorsdomain “\*” --rpcaddr "0.0.0.0" --rpcapi db,eth,net,web3,personal,miner --ws --wsorigins="\*" --wsapi db,eth,net,web3,personal --port 30303 --nodiscover --maxpeers 10 --verbosity 3 --unlock 0  --password chaindata/password.txt --mine --minerthreads=5 
 
 
 Dissecting the geth command. 
