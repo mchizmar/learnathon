@@ -22,7 +22,7 @@ Ethereum is also a platform that can be used to establish a private network that
 
 I have created a private network and am hosting it on an AWS EC2 Medium instance running Amazon's Linux. As a demo I have created a rental app using web and conversational apps that interact with a smart contract deployed on the network. 
 
-This challenge is to to create a mining node and connect it to my private network. 
+This challenge is to create a private ethereum mining node on an AWS EC2 instance.  
 
 ### Prerequisites
 Running this challenge necessitates basic SSH software and understanding for executing commands from the command line. 
@@ -31,54 +31,31 @@ Running this challenge necessitates basic SSH software and understanding for exe
     * Ex. Windows use Putty. 
     * Macs can use the command line.
 
+## Challenge 1 - Creating an EC2 Instance to Host Your Miner
+
 * Create an Amazon EC2 Instance. This will be used to host your miner. 
     * [Log into AWS console](https://nwblockchain.signin.aws.amazon.com/console)
-    * *IMPORTANT* make sure you are in the N. Virginia Zone. 
-    * Select EC2 under the Services Menu
-    * Select the Running Instances Link
-    * Create a similar instance
-        * Select the instance: Blockchain Host
-        * Select the "Action" botton and "Launch More Like This" 
-        * Scroll to the "Tags" section and *change the name*: ex. Mikes Blockchain Host
+    * *IMPORTANT* make sure the N. Virginia Zone is selected in the top right corner. 
+    * Select "EC2" under the "Services Menu"
+    * Select the "Running Instances" Link
+    * Creating a new instance
+        * Select the checkbox next to existing instance: "Blockchain Host"
+        * Select the "Action" button and "Launch More Like This" 
+        * Select "3. Configure Instance" from the links at the top. 
+            * Scroll down and expand the "Advanced" section.
+            * In the "User Data Box" Copy-and-Paste [the script found here.](https://github.com/mchizmar/learnathon/blob/master/setting-up-a-miner/installgeth.sh)
+            * Leave the "As Text" button selected. 
+            * Click the "Review and Launch" button at the bottom of the screen. 
+        * Edit Tags to change the name 
+            * Scroll to the "Tags" section and Expand it. 
+            * Hit "Edit Tags" Link.
+            * Edit and the "Name" value. Please use something like: <short-name>Instance. 
         * Select the "Launch" Button
         * Select Choose an existing key pair and nwblockchain-key
-        * acknowledge and "Launch Instance"
+        * Acknowledge and "Launch Instance"
+        * In the EC2 Dashboard *wait* till the "Instance State" column says "running"
 
-* Initialize your EC2 instance
-    * ssh into your 
-    * Use the script found here: https://github.com/mchizmar/learnathon/blob/master/setting-up-a-miner/installgeth.sh
-    * 
-
-* SSH into your instance
-    * From the EC2 Dashboard select your instance
-    * In the bottom tabs select the "Description" tab
-    * Make a copy of your IPv4 Public IP somewhere for later use. 
-    * *Important* the key file (essentially the password) is located in setting-up-a-miner/nwblockchain-key.pem. You need this to ssh.
-    * *Important* make sure the pem file is readable by only you. For Bash this is: chmod 400 nwblockchain-key.pem
-    * *Username* ec2-user
-    * Now SSH into your machine. 
-        * Bash ex.: ssh -i nwblockchain-key.pem ec2-user@<ip-you-copied-above>
-
-
-* [Go Ethereum - Geth](https://geth.ethereum.org/): Ethereum Protocol Implementation
-    * [Download Geth here.](https://geth.ethereum.org/downloads/). Choose the correct installation for you OS.
-    * Geth is sofware used to configure miners and interact on an Ethereum network. 
-
-* Genesis File 
-    * A genesis file is a configuration file describing the network you are joining or creating.
-    * You are joining an existing network for this challenge which requires you to use the **exact** genesis file the original network was created from and is found in: 
-        * from github learnathon/setting-up-a-miner/genesis.json
-    * Verify with md5sum for genesis.json: 661aa786e2d52d64bfe31fc05ec666af
-
-* Storing Chain Data
-    * Chain data is the information created and stored when you are mining. Its the Blockain. 
-    * It is recommended to use learnathon/setting-up-a-miner/chaindata. 
-        * chaindata/keystore contains the keys for accounts have have been preconfigured on the network. 
-        * You need these keys to create a miner on the network.
-    * This chaindata is also known as "datadir" for the upcoming geth commands. 
-
-
-## Creating a Miner
+## Challenge 2 - Creating a Miner
 At this point, creating a miner is a relatively simple task, assuming the prerequisites have been followed. 
 
 ### Creating a Local Miner
@@ -121,53 +98,15 @@ Dissecting the geth command.
 
 
 
+* Genesis File 
+    * A genesis file is a configuration file describing the network you are joining or creating.
+    * You are joining an existing network for this challenge which requires you to use the **exact** genesis file the original network was created from and is found in: 
+        * from github learnathon/setting-up-a-miner/genesis.json
+    * Verify with md5sum for genesis.json: 661aa786e2d52d64bfe31fc05ec666af
 
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Storing Chain Data
+    * Chain data is the information created and stored when you are mining. Its the Blockain. 
+    * It is recommended to use learnathon/setting-up-a-miner/chaindata. 
+        * chaindata/keystore contains the keys for accounts have have been preconfigured on the network. 
+        * You need these keys to create a miner on the network.
+    * This chaindata is also known as "datadir" for the upcoming geth commands. 
