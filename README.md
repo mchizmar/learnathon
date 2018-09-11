@@ -72,8 +72,11 @@ Running this challenge necessitates basic SSH software and understanding for exe
 At this point your server instance is up and running and you are logged into an SSH session. In order to c
 * Initializing your chain. 
     * First you will need to create a directory that will store all of your miners data. We will call this directory chaindata. Lets create it.
-    * 
-    * cd ethereum
+    * A defualt "chaindata" is provided from the "ethereum/learnathon" directory and we will use that. 
+    * Run these commands:
+        * cd ethereum
+        * cp -rf 
+
 *  
 * Change directory to learnathon/setting-up-a-miner
 * Initializing your miner to mine on my private network. 

@@ -7,13 +7,11 @@ yes |  yum install git
 
 #Create directories to do the the work
 mkdir /home/ec2-user/ethereum
-mkdir /home/ec2-user/ethereum/learnathon
 
 #Checkout the git repo
-cd /home/ec2-user/ethereum/learnathon
-git clone https://github.nwie.net/chizmm1/learnathon.git
-
-
+cd /home/ec2-user/ethereum/
+git clone https://github.com/mchizmar/learnathon.git
+          
 # Build geth from source 
 cd /home/ec2-user/ethereum 
 wget https://github.com/ethereum/go-ethereum/archive/master.zip
