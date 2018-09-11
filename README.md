@@ -70,16 +70,28 @@ Running this challenge necessitates basic SSH software and understanding for exe
 ## Challenge 2 - Creating a Miner
 
 At this point your server instance is up and running and you are logged into an SSH session. In order to c
-* Initializing your chain. 
+* Initializing the Directory Structure. 
     * First you will need to create a directory that will store all of your miners data. We will call this directory chaindata. Lets create it.
     * A defualt "chaindata" is provided from the "ethereum/learnathon" directory and we will use that. 
     * Run these commands:
         * cd ethereum
         * cp -rf learnathon/setting-up-a-miner/chaindata .
-    * chaindata contains important keystore information needed to create our miner. This information will be used in the following commands. 
+    * chaindata contains important keystore and password information needed to create our miner and is used in the following commands. 
 
-
-*  
+* Initializing the Miner
+    * A miner is initialized using a genesis block config that describes the network your miner is connecting to. We will call it genesis.json.
+    * All miners **have to use the exact same** genesis.json to connect to the network. It cannot even a blank space off.
+    * A default genesis.json is provided. Copy it to the ethereum directory: 
+        * cp learnathon/setting-up-a-miner/genesis.json .
+    * Validate the genesis.json is an exact copy.
+        * md5sum genesis.json
+        * output has to be: 661aa786e2d52d64bfe31fc05ec666af
+    * Now lets use the genesis file to initialize your miner. Run this command:
+        * geth --datadir chaindata init genesis.json
+    
+* Running Your Miner 
+    * Your chain is now initialized and you can now run the miner. 
+    * 
 * Change directory to learnathon/setting-up-a-miner
 * Initializing your miner to mine on my private network. 
     * This is done by running the geth command below. Recall, the genesis.json has to be the exact file used to create the intial node. If you use the file from github you should be fine: 
