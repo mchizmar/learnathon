@@ -28,7 +28,7 @@ This challenge is to create a private ethereum mining node on an AWS EC2 instanc
 Running this challenge necessitates basic SSH software and understanding for executing commands from the command line. 
 
 * Install an ssh client and know how to use it. You will need to remote log into a server running on AWS using a key file. Please consult documentation on how to use your SSH client.
-    * Ex. Windows use Putty. 
+    * Ex. Windows use Putty which is TSB approved. [AWS Instructions to use Putty.](https://docs.aws.amazon.com/console/ec2/instances/connect/putty)
     * Macs can use the command line.
 
 ## Challenge 1 - Creating an EC2 Instance to Host Your Miner
@@ -43,7 +43,7 @@ Running this challenge necessitates basic SSH software and understanding for exe
         * Select the "Action" button and "Launch More Like This" 
         * Select "3. Configure Instance" from the links at the top. 
             * Scroll down and expand the "Advanced" section.
-            * In the "User Data Box" Copy-and-Paste [the script found here.](https://github.com/mchizmar/learnathon/blob/master/setting-up-a-miner/installgeth.sh)
+            * In the "User Data Box" validate [the script found here](https://github.com/mchizmar/learnathon/blob/master/setting-up-a-miner/installgeth.sh) shows up. If not, copy-and-paste it in. 
             * Leave the "As Text" button selected. 
             * Click the "Review and Launch" button at the bottom of the screen. 
         * Edit Tags to change the name 
@@ -53,13 +53,25 @@ Running this challenge necessitates basic SSH software and understanding for exe
         * Select the "Launch" Button
         * Select Choose an existing key pair and nwblockchain-key
         * Acknowledge and "Launch Instance"
-        * In the EC2 Dashboard *wait* till the "Instance State" column says "running"
+        * In the EC2 Dashboard *wait* till the "Instance State" column says "running" (about 5 min).
+    * SSH into your instance
+        * You will need the IPv4 address of your instance. 
+            * In the EC2 Dashboard select your instance. 
+            * IPv4 is found on the bottom of the page in the Description tab
+        * You will need the key file
+            * The key file [is found here.](https://github.com/mchizmar/learnathon/blob/master/setting-up-a-miner/nwblockchain-key.pem)
+            * Copy-and-Paste the contents into a local file named "nwblockchain-key.pem".
+                * Alternately you can clone this git repo. 
+            * The username is **ec2-user** 
+            * You can now ssh into the instance, Ex. :
+                * ssh -i nwblockchain-key.pem ec2-user@<ipv4>
+                * [AWS Instructions to use Putty](https://docs.aws.amazon.com/console/ec2/instances/connect/putty)
 
 ## Challenge 2 - Creating a Miner
-At this point, creating a miner is a relatively simple task, assuming the prerequisites have been followed. 
 
-### Creating a Local Miner
-* Open up a command line - DOS or MacOS/Bash shell. 
+At this point your server instance is up and running and you are logged into an SSH session. In order to c
+* Setting up the directory structure. 
+*  
 * Change directory to learnathon/setting-up-a-miner
 * Initializing your miner to mine on my private network. 
     * This is done by running the geth command below. Recall, the genesis.json has to be the exact file used to create the intial node. If you use the file from github you should be fine: 
