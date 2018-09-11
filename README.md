@@ -43,7 +43,7 @@ Running this challenge necessitates basic SSH software and understanding for exe
         * Select the "Action" button and "Launch More Like This" 
         * Select "3. Configure Instance" from the links at the top. 
             * Scroll down and expand the "Advanced" section.
-            * In the "User Data Box" validate [the script found here](https://github.com/mchizmar/learnathon/blob/master/setting-up-a-miner/installgeth.sh) shows up. If not, copy-and-paste it in. 
+            * In the "User Data Box" there will be a script. **Replace** that script with [the script found here](https://github.com/mchizmar/learnathon/blob/master/setting-up-a-miner/installgeth.sh). 
             * Leave the "As Text" button selected. 
             * Click the "Review and Launch" button at the bottom of the screen. 
         * Edit Tags to change the name 
@@ -93,8 +93,11 @@ At this point your server instance is up and running and you are logged into an 
     * Your chain is now initialized and you can now run the miner. 
     * In the ethereum directory, execute the following command (see details about command below): 
         * geth --datadir chaindata --networkid 63 --identity "node1" --etherbase=0x30855962411de128042b5d5c495c5c67a3b6498a --rpc --rpcport 8885 --rpccorsdomain “*” --rpcaddr "0.0.0.0" --rpcapi db,eth,net,web3,personal,miner --ws --wsorigins="*" --wsapi db,eth,net,web3,personal --port 30303 --nodiscover --maxpeers 10 --verbosity 3 --unlock 0 --password chaindata/password.txt --mine --minerthreads=5 
-    
+    * This outputs to the screen. You can stop the server by hitt Ctrl-C. 
+    * You can now use the convience script to start the server. 
+        * cp 
     * Thats it. You have started a node **BUT** its not officially connected to the network yet thats coming in the "Adding a Peer". 
+
 
 * Attaching a console 
     * A console allows you to run commands agains your running geth miner. 
