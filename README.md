@@ -35,7 +35,7 @@ Running this challenge necessitates basic SSH software and understanding for exe
 
 * Create an Amazon EC2 Instance. This will be used to host your miner. 
     * [Log into AWS console](https://nwblockchain.signin.aws.amazon.com/console)
-    * *IMPORTANT* make sure the N. Virginia Zone is selected in the top right corner. 
+    * **IMPORTANT** make sure the N. Virginia Zone is selected in the top right corner. 
     * Select "EC2" under the "Services Menu"
     * Select the "Running Instances" Link
     * Creating a new instance
@@ -49,7 +49,7 @@ Running this challenge necessitates basic SSH software and understanding for exe
         * Edit Tags to change the name 
             * Scroll to the "Tags" section and Expand it. 
             * Hit "Edit Tags" Link.
-            * Edit and the "Name" value. Please use something like: <short-name>Instance. 
+            * Edit and the "Name" value. Please use something like: your-short-name-Instance. 
         * Select the "Launch" Button
         * Select Choose an existing key pair and nwblockchain-key
         * Acknowledge and "Launch Instance"
@@ -64,13 +64,16 @@ Running this challenge necessitates basic SSH software and understanding for exe
                 * Alternately you can clone this git repo. 
             * The username is **ec2-user** 
             * You can now ssh into the instance, Ex. :
-                * ssh -i nwblockchain-key.pem ec2-user@<ipv4>
+                * ssh -i nwblockchain-key.pem ec2-user@ipv4
                 * [AWS Instructions to use Putty](https://docs.aws.amazon.com/console/ec2/instances/connect/putty)
 
 ## Challenge 2 - Creating a Miner
 
 At this point your server instance is up and running and you are logged into an SSH session. In order to c
-* Setting up the directory structure. 
+* Initializing your chain. 
+    * First you will need to create a directory that will store all of your miners data. We will call this directory chaindata. Lets create it.
+    * 
+    * cd ethereum
 *  
 * Change directory to learnathon/setting-up-a-miner
 * Initializing your miner to mine on my private network. 
