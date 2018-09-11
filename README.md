@@ -1,6 +1,7 @@
 # Mine the Blockchain Challenge
 
-In this challenge you are going to set up an Ethereum miner for a private  network.   
+In this challenge you are going to set up an Ethereum miner hosted on an Amazon EC2 linux server. 
+You will also be able to interact with Smart Contracts deployed on the network to get a basic undersatnding for how they work.    
 
 ## Getting Started
 
@@ -24,26 +25,40 @@ I have created a private network and am hosting it on an AWS EC2 Medium instance
 This challenge is to to create a mining node and connect it to my private network. 
 
 ### Prerequisites
-Downloading and install the necessary software
+Running this challenge necessitates basic SSH software and understanding for executing commands from the command line. 
 
-* Create an Amazon EC2 Instance to host your miner
+* Install an ssh client and know how to use it. You will need to remote log into a server running on AWS using a key file. Please consult documentation on how to use your SSH client.
+    * Ex. Windows use Putty. 
+    * Macs can use the command line.
+
+* Create an Amazon EC2 Instance. This will be used to host your miner. 
     * [Log into AWS console](https://nwblockchain.signin.aws.amazon.com/console)
+    * *IMPORTANT* make sure you are in the N. Virginia Zone. 
     * Select EC2 under the Services Menu
-    * Select Launch Instance Button
-        * Select: Amazon Linux 2 AMI (HVM), SSD Volume Type
-        * Select Instance Type : t2.medium
-        * Select Review and Launch
-        * Create your key file you will use to secure login/ssh to your new machine and save for later. You will need to use PuTTy or the command line. 
-    * Enable Security Groups to enable Inbounf SSH and Blockchain connections to your server. 
-        * In the left hand navigation select Network and Security/Security Groups. 
-        * Select the Create Security Group
-            * Give the group a name and add the *inbound* groups displayed in the provided image. 
+    * Select the Running Instances Link
+    * Create a similar instance
+        * Select the instance: Blockchain Host
+        * Select the "Action" botton and "Launch More Like This" 
+        * Scroll to the "Tags" section and *change the name*: ex. Mikes Blockchain Host
+        * Select the "Launch" Button
+        * Select Choose an existing key pair and nwblockchain-key
+        * acknowledge and "Launch Instance"
 
+* Initialize your EC2 instance
+    * ssh into your 
+    * Use the script found here: https://github.com/mchizmar/learnathon/blob/master/setting-up-a-miner/installgeth.sh
+    * 
 
+* SSH into your instance
+    * From the EC2 Dashboard select your instance
+    * In the bottom tabs select the "Description" tab
+    * Make a copy of your IPv4 Public IP somewhere for later use. 
+    * *Important* the key file (essentially the password) is located in setting-up-a-miner/nwblockchain-key.pem. You need this to ssh.
+    * *Important* make sure the pem file is readable by only you. For Bash this is: chmod 400 nwblockchain-key.pem
+    * *Username* ec2-user
+    * Now SSH into your machine. 
+        * Bash ex.: ssh -i nwblockchain-key.pem ec2-user@<ip-you-copied-above>
 
-
-* Checkout the Github project t 
-    * https://github.nwie.net/chizmm1/learnathon
 
 * [Go Ethereum - Geth](https://geth.ethereum.org/): Ethereum Protocol Implementation
     * [Download Geth here.](https://geth.ethereum.org/downloads/). Choose the correct installation for you OS.
