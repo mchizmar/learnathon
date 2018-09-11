@@ -75,7 +75,9 @@ At this point your server instance is up and running and you are logged into an 
     * A defualt "chaindata" is provided from the "ethereum/learnathon" directory and we will use that. 
     * Run these commands:
         * cd ethereum
-        * cp -rf 
+        * cp -rf learnathon/setting-up-a-miner/chaindata .
+    * chaindata contains important keystore information needed to create our miner. This information will be used in the following commands. 
+
 
 *  
 * Change directory to learnathon/setting-up-a-miner
