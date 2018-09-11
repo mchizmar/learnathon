@@ -91,17 +91,30 @@ At this point your server instance is up and running and you are logged into an 
     
 * Running Your Miner 
     * Your chain is now initialized and you can now run the miner. 
-    * 
-* Change directory to learnathon/setting-up-a-miner
-* Initializing your miner to mine on my private network. 
-    * This is done by running the geth command below. Recall, the genesis.json has to be the exact file used to create the intial node. If you use the file from github you should be fine: 
-        * geth --datadir chaindata init genesis.json
-* Now that you are configured and initialized, you can now being joining the network by starting up a geth node instance. 
-    * Starting your geth node to connect to the my private network:
-        * geth --datadir chaindata --networkid 63 --identity "node1" --etherbase=0x348cdfd4875cd7c522e1ea0376b07b03e850b02a --rpc --rpcport 8885 --rpccorsdomain “\*” --rpcaddr "0.0.0.0" --rpcapi db,eth,net,web3,personal,miner --ws --wsorigins="\*" --wsapi db,eth,net,web3,personal --port 30303 --nodiscover --maxpeers 10 --verbosity 3 --unlock 0  --password chaindata/password.txt --mine --minerthreads=5 
+    * In the ethereum directory, execute the following command (see details about command below): 
+        * geth --datadir chaindata --networkid 63 --identity "node1" --etherbase=0x30855962411de128042b5d5c495c5c67a3b6498a --rpc --rpcport 8885 --rpccorsdomain “*” --rpcaddr "0.0.0.0" --rpcapi db,eth,net,web3,personal,miner --ws --wsorigins="*" --wsapi db,eth,net,web3,personal --port 30303 --nodiscover --maxpeers 10 --verbosity 3 --unlock 0 --password chaindata/password.txt --mine --minerthreads=5 
+    
+    * Thats it. You have started a node **BUT** its not officially connected to the network yet thats coming in the "Adding a Peer". 
+
+* Attaching a console 
+    * A console allows you to run commands agains your running geth miner. 
+    * Attach a console by running the followin command: 
+        * geth attach ipc:/home/ec2-user/ethereum/chaindata/geth.ipc 
+    * You should get output like this that ends with a ">" prompt.
+    * You are now able to run commands against your miner. 
+
+* Adding a Peer
+    * In order to mine in the network, you need to connect to the main node as a peer. 
+    * From your geth console, add a peer by executing:
+        * admin.addPeer("enode://6b34477ee65637167b679ddb9ef935884c5e923bf075c15e67551c37395c2ef3c08f98340ad6989fab7269d01311b40a7f7a2678b8c9c655afb0518af8cb8089@52.207.236.211:30303?discport=0")
+    * Validating a peer was added. Run this in your geth console:
+        * admin.peers
+    
+    * If output is not an empty array, you have successfully completed the challenge and are mining on my private chain. 
+    * The "enode" above points to my Blockchain Host instance that is currently mining. 
 
 
-Dissecting the geth command. 
+## Dissecting the geth command. 
 
 --datadir chaindata : data directory for your chain. Same directory used creating the accounts  
 --networkid 63 : This is important and **MUST** match the chainID from the genesis file. It specifies which network you are connecting to. 1 is the public network. 
@@ -126,19 +139,3 @@ Dissecting the geth command.
 --password chaindata/password.txt : file with the passwords used to unlock you accounts.
 --mine : tells this node to mine
 --minerthreads=5 : number of CPU threads used to mine
-
-
-
-
-* Genesis File 
-    * A genesis file is a configuration file describing the network you are joining or creating.
-    * You are joining an existing network for this challenge which requires you to use the **exact** genesis file the original network was created from and is found in: 
-        * from github learnathon/setting-up-a-miner/genesis.json
-    * Verify with md5sum for genesis.json: 661aa786e2d52d64bfe31fc05ec666af
-
-* Storing Chain Data
-    * Chain data is the information created and stored when you are mining. Its the Blockain. 
-    * It is recommended to use learnathon/setting-up-a-miner/chaindata. 
-        * chaindata/keystore contains the keys for accounts have have been preconfigured on the network. 
-        * You need these keys to create a miner on the network.
-    * This chaindata is also known as "datadir" for the upcoming geth commands. 
