@@ -94,12 +94,11 @@ At this point your server instance is up and running and you are logged into an 
     * In the ethereum directory, execute the following command (see details about command below): 
         * geth --datadir chaindata --networkid 63 --identity "node1" --etherbase=0x30855962411de128042b5d5c495c5c67a3b6498a --rpc --rpcport 8885 --rpccorsdomain “*” --rpcaddr "0.0.0.0" --rpcapi db,eth,net,web3,personal,miner --ws --wsorigins="*" --wsapi db,eth,net,web3,personal --port 30303 --nodiscover --maxpeers 10 --verbosity 3 --unlock 0 --password chaindata/password.txt --mine --minerthreads=5 
     * This outputs to the screen. You can stop the server by hitt Ctrl-C. 
-    * You can now use the convience script to start the server in the background:
+    * You can now use the convience script to start the server in the background. In the ethereum directory run:
         * cp learnathon/setting-up-a-miner/startgeth.sh .
         * chmod 755 startgeth.sh
         * ./startgeth.sh
-        * This pipes the logs to chaindata/logs directory. 
-
+        * This pipes the logs to chaindata/logs directory and runs the server in the background.  
     * Thats it. You have started a node **BUT** its not officially connected to the network yet thats coming in the "Adding a Peer". 
 
 
@@ -109,11 +108,16 @@ At this point your server instance is up and running and you are logged into an 
         * geth attach ipc:/home/ec2-user/ethereum/chaindata/geth.ipc 
     * You should get output like this that ends with a ">" prompt.
     * You are now able to run commands against your miner. 
+    * You can now use a convenience script to attach to your miner. In the ethereum directory run:
+        * cp learnathon/setting-up-a-miner/attachgeth.sh .
+        * chmod 755 attachgeth.sh
+        * ./attaachgeth.sh
+
 
 * Adding a Peer
     * In order to mine in the network, you need to connect to the main node as a peer. 
     * From your geth console, add a peer by executing:
-        * admin.addPeer("enode://6b34477ee65637167b679ddb9ef935884c5e923bf075c15e67551c37395c2ef3c08f98340ad6989fab7269d01311b40a7f7a2678b8c9c655afb0518af8cb8089@52.207.236.211:30303?discport=0")
+        * admin.addPeer("enode://67a8ef542b9660af9fca02067da6cbd1ff2c594645bd14a19ca90a8bee55753f97676f84a0f4abff97c277baaa4613c3ba32022c59297f32ae5e6903b7ed9b92@52.207.236.211:30303?discport=0")
     * Validating a peer was added. Run this in your geth console:
         * admin.peers
     
