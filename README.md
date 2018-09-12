@@ -17,14 +17,16 @@ Ethereum Smart Contacts are applicaitons written in the Solidity programming lan
 The main Ethereum network is public and anyone with ether can deploy smart contracts to it. Miners are nodes in this decentralized network that execute smart contract code and verify all transactions on they make. The state of these transactions are stored in a Blockchain database and an exact copy of it is ditributed to all nodes in the network. A miner that is the first to verify a specific set of transactions, and all nodes agree on this verification, gets ether as a reward.
 
 #### Private Miner
-Ethereum is also a platform that can be used to establish a private network that has all of the functionality of the public side, but unlike the public side, an admisitrator governs who is allowed to run a node in the network. When business partners choose to participated in a decentralized private network, its called a consortium. 
+Ethereum is also a platform that can be used to establish a private network that has all of the functionality of the public side, but unlike the public network, an admisitrator governs who is allowed to run a node in the network. When business partners choose to participated in a decentralized private network, its called a consortium. 
 
-I have created a private network and am hosting it on an AWS EC2 Medium instance running Amazon's Linux. As a demo I have created a rental app using web and conversational apps that interact with a smart contract deployed on the network. 
+I have created a private network and am hosting it on an AWS EC2 Medium instance running Amazon's Linux. As a demo my partner in crime Coty Collins and I have created a web and a conversational app that interacts with smart contracts deployed on the private network. The smart contracts programmatically manage the rental of an asset and the exchange in payment for that rental.
 
-This challenge is to create a private ethereum mining node on an AWS EC2 instance.  
+Miners are responsible for executing the smart contract code and validating any changes made to the contract. This challenge is to create a private ethereum mining node on an AWS EC2 instance.  
 
 ### Prerequisites
 Running this challenge necessitates basic SSH software and understanding for executing commands from the command line. 
+
+* Access to the guest network that will be used to secure login (ssh) to servers you will create on AWS. 
 
 * Install an ssh client and know how to use it. You will need to remote log into a server running on AWS using a key file. Please consult documentation on how to use your SSH client.
     * Ex. Windows use Putty which is TSB approved. [AWS Instructions to use Putty.](https://docs.aws.amazon.com/console/ec2/instances/connect/putty)
