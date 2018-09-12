@@ -1,4 +1,4 @@
-# Mine the Blockchain Challenge
+# Mining a Blockchain Challenge, Part 1
 
 In this challenge you are going to set up an Ethereum miner hosted on an Amazon EC2 linux server. 
 You will also be able to interact with Smart Contracts deployed on the network to get a basic undersatnding for how they work.    
@@ -17,7 +17,6 @@ Ethereum Smart Contacts are applicaitons written in the Solidity programming lan
 The main Ethereum network is public and anyone with ether can deploy smart contracts to it. Miners are nodes in this decentralized network that execute smart contract code and verify all transactions on they make. The state of these transactions are stored in a Blockchain database and an exact copy of it is ditributed to all nodes in the network. A miner that is the first to verify a specific set of transactions, and all nodes agree on this verification, gets ether as a reward.
 
 #### Private Miner
-Your challenger is 
 Ethereum is also a platform that can be used to establish a private network that has all of the functionality of the public side, but unlike the public side, an admisitrator governs who is allowed to run a node in the network. When business partners choose to participated in a decentralized private network, its called a consortium. 
 
 I have created a private network and am hosting it on an AWS EC2 Medium instance running Amazon's Linux. As a demo I have created a rental app using web and conversational apps that interact with a smart contract deployed on the network. 
@@ -150,3 +149,5 @@ At this point your server instance is up and running and you are logged into an 
 --password chaindata/password.txt : file with the passwords used to unlock you accounts.
 --mine : tells this node to mine
 --minerthreads=5 : number of CPU threads used to mine
+
+
