@@ -7,8 +7,9 @@ yes |  yum install git
 
 #Create directories to do the the work
 mkdir /home/ec2-user/ethereum
+mkdir /home/ec2-user/ethereum/learnathon
 
-#Checkout the learnathon git repo
+#Checkout the git repo
 cd /home/ec2-user/ethereum/
 git clone https://github.com/mchizmar/learnathon.git
 
@@ -25,3 +26,4 @@ chown -R ec2-user:ec2-user  /home/ec2-user
 # Set geth in the PATH
 echo PATH=$PATH:/home/ec2-user/ethereum/go-ethereum-master/build/bin >> /home/ec2-user/.bash_profile
 echo export PATH >> /home/ec2-user/.bash_profile
+
