@@ -1,12 +1,12 @@
-# Mining a Blockchain Challenge, Part 1
+# Mining a Blockchain Challenge - The Learnathon Consortium, Part 1
 
-In this challenge you are going to set up an Ethereum miner hosted on an Amazon EC2 linux server. 
+In this challenge you are going to set up an Ethereum miner hosted on an Amazon EC2 Linux server. 
 You will also be able to interact with Smart Contracts deployed on the network to get a basic undersatnding for how they work.    
 
 ## Getting Started
 
 ### Ethereum
-"[Etherum](https://www.ethereum.org/)  is a decentralized platform that runs smart contracts: applications that run exactly as programmed 
+"[Etherum](https://www.ethereum.org/) is a decentralized platform that runs smart contracts: applications that run exactly as programmed 
 without any possibility of downtime, censorship, fraud or third-party interference.
 
 These apps run on a custom built blockchain, an enormously powerful shared global infrastructure that can 
@@ -14,14 +14,14 @@ move value around and represent the ownership of property."
 
 Ethereum Smart Contacts are applicaitons written in the Solidity programming language that run on an Ethereum network. The main purpose of the contracts is to control transactions and exchange of value between accounts on the network. The currency of echange on the network is called ether and it is the second most valued public cryptocurrency behind Bitcoin. 
 
-The main Ethereum network is public and anyone with ether can deploy smart contracts to it. Miners are nodes in this decentralized network that execute smart contract code and verify all transactions on they make. The state of these transactions are stored in a Blockchain database and an exact copy of it is ditributed to all nodes in the network. A miner that is the first to verify a specific set of transactions, and all nodes agree on this verification, gets ether as a reward.
+The main Ethereum network is public and anyone with ether can deploy smart contracts to it. Miners are nodes in this decentralized network that execute smart contract code and verify all of the transactions they make. The state of these transactions are stored in a blockchain database and an exact copy of it is ditributed to all nodes in the network. A miner that is the first to verify a specific set of transactions, and all nodes agree on this verification, gets ether as a reward.
 
 #### Private Miner
-Ethereum is also a platform that can be used to establish a private network that has all of the functionality of the public side, but unlike the public network, an admisitrator governs who is allowed to run a node in the network. When business partners choose to participated in a decentralized private network, its called a consortium. 
+Ethereum is also a platform that can be used to establish a private network that has all of the functionality of the public side, but unlike the public network, an admisitrator governs who is allowed to run a node in the network. When business partners choose to participated in a decentralized private network, its called a consortium. Nationwide is currently evaluating taking part  in a private consortium called [RiskBlock Alliance](https://onyourside.sharepoint.com/_layouts/15/sharepoint.aspx?q=riskblock&v=%2Fsearch). 
 
-I have created a private network and am hosting it on an AWS EC2 Medium instance running Amazon's Linux. As a demo my partner in crime Coty Collins and I have created a website and chatbot that interacts with smart contracts deployed on the private network. The smart contracts programmatically manage the rental of an asset and the exchange in payment for that rental.
+I have created a private network and am hosting it on an AWS EC2 Linux instance. As a demo, my partner in crime Coty Collins and I have created a website and chatbot that interacts with smart contracts deployed on the private network. The smart contracts programmatically manage the rental of an asset and the exchange in payment for that rental.
 
-Miners are responsible for executing the smart contract code and validating any changes made to the contract. This challenge is to create a private ethereum mining node on an AWS EC2 instance.  
+Miners are responsible for executing the smart contract code and validating any changes made to the contract. This challenge is to create a private ethereum mining node on an AWS EC2 instance and connect it to my private network called **The Learnathon Consortium**.
 
 ### Prerequisites
 Running this challenge necessitates basic SSH software and understanding for executing commands from the command line. 
